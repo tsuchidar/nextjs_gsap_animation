@@ -60,7 +60,8 @@ export default function Home() {
             className="h-screen w-full flex items-center justify-center pin-image"
           >
             <div
-              className={`image-inner relative h-[40vh] w-[80vw] bg-white rounded-lg shadow-2xl mt-[${i * 20}px]`}
+              className="image-inner relative h-[40vh] w-[80vw] bg-white rounded-lg shadow-2xl"
+              style={{ marginTop: `${i * 20}px` }}
             >
               <Image
                 src={`/img_${i + 1}.jpg`}
