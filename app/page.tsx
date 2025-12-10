@@ -9,23 +9,35 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Home() {
   useGSAP(() => {
-    // 各画像に対して個別にpinを設定
+    // 各画像に対して
     const images = gsap.utils.toArray<HTMLElement>(".pin-image");
+    // const images = document.querySelectorAll(".pin-image");
 
     images.forEach((image, index) => {
       const remainingImages = images.length - (index + 1);
+      const imageInner = image.querySelector(".image-inner");
+      const extraPinDuration = window.innerHeight * 0.5;
 
+      // pin
       ScrollTrigger.create({
         trigger: image,
         start: `center 40%+=${index * 10}`,
-        end:
-          remainingImages > 0
-            ? `+=${remainingImages * window.innerHeight}`
-            : "+=0",
+        end: `+=${remainingImages * window.innerHeight + extraPinDuration}`,
         pin: true,
         pinSpacing: false,
-        scrub: 0.5,
-        markers: true,
+        // markers: true,
+      });
+
+      // scaleアニメーション
+      gsap.to(imageInner, {
+        scale: 0.9,
+        scrollTrigger: {
+          trigger: imageInner,
+          start: "top 40%",
+          end: "bottom 40%",
+          scrub: 0.5,
+          markers: true,
+        },
       });
     });
   });
@@ -34,7 +46,7 @@ export default function Home() {
     <div>
       <div className="h-screen w-full bg-gray-300 flex items-center justify-center">
         <p className="text-4xl font-bold text-center">
-          GSAP animation
+          GSAP ANIMATION DEMO
           <br />
           <br /> ↓<br />↓<br /> ↓<br />
           <br />
@@ -42,7 +54,7 @@ export default function Home() {
         </p>
       </div>
       <div>
-        {Array.from({ length: 4 }, (_, i) => (
+        {Array.from({ length: 5 }, (_, i) => (
           <div
             key={i}
             className="h-screen w-full flex items-center justify-center pin-image"
@@ -53,7 +65,7 @@ export default function Home() {
               <Image
                 src={`/img_${i + 1}.jpg`}
                 fill
-                className="object-cover rounded-lg"
+                className="image-item object-cover rounded-lg"
                 alt={`画像${i + 1}`}
               />
             </div>
