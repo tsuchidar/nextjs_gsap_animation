@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className="flex min-h-screen flex-col bg-[#f7f7f7]">
-        <main className=" relative flex-1 py-10">{children}</main>
+        <main className="relative flex-1">{children}</main>
       </body>
     </html>
   );
